@@ -59,7 +59,7 @@ function render(a){
  return h}
 const ICON='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
 async function ask(text){document.getElementById('welcome')?.remove();hist.push({role:'user',content:text});
- const d=document.createElement('section');d.innerHTML='<div class="q"></div><div class="ans"><span class="dots">Searching the lessons</span></div><div class="tools"></div>';d.querySelector('.q').textContent=text;chat.appendChild(d);d.scrollIntoView({behavior:'smooth'});
+ const d=document.createElement('section');d.innerHTML='<div class="q"></div><div class="ans"><span class="dots">Searching the lessons</span></div><div class="tools"></div>';d.querySelector('.q').textContent=text;chat.appendChild(d);window.scrollTo({top:Math.max(0,d.offsetTop-80),behavior:'smooth'});
  const b=d.querySelector('.ans'),m=d.querySelector('.tools');const t0=performance.now();let ans='',first=0,fu=[];
  try{const r=await fetch(URL_,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:hist,session_id:sid})});
   if(!r.ok){b.textContent="KA-AI Chat is busy right now. Please try again in a moment.";return}
