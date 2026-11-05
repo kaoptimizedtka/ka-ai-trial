@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>KA-AI Chat (trial)</title>
+<title>KA-AI Chat</title>
 <style>
 :root{--g:#141b4d;--gr:#11c526;--gl:#e6f8e9;--ink:#14202b;--mute:#6b7280;--line:#e3e6ef}
 *{box-sizing:border-box}body{margin:0;background:#fff;color:var(--ink);font:17px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}a{text-decoration:none}
@@ -30,7 +30,7 @@ form{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid
 button.send{background:var(--gr);font-weight:600;color:#fff;border:0;border-radius:12px;padding:0 20px;font:inherit;cursor:pointer}
 .foot{max-width:860px;margin:6px auto 0;font-size:11px;color:var(--mute);text-align:center}
 </style></head><body>
-<header><img src="hdr/image.png" alt="KA-AI Chat" style="height:54px;display:block"><small>Trial build — not public</small></header>
+<header><img src="hdr/image.png" alt="KA-AI Chat" style="height:54px;display:block"></header>
 <main id="chat"><div class="welcome" id="welcome"><img src="ic/image.png" alt="" style="width:64px;height:64px"><h1>Welcome to KA-AI Chat</h1><p>Ask anything about KA philosophy, surgical technique, KA-optimized implant design, outcomes and clinical evidence.</p>
 <div class="starters">
 <button>What are the three kinematic axes of the knee?</button><button>What are the four balancing steps for KA?</button>
@@ -40,7 +40,7 @@ button.send{background:var(--gr);font-weight:600;color:#fff;border:0;border-radi
 <script>
 (()=>{const i=document.querySelector(".welcome img");if(i){const l=document.createElement("link");l.rel="icon";l.href=i.src;document.head.appendChild(l)}})();
 const URL_="https://adfkanenpirzxjejmbog.supabase.co/functions/v1/ka-chat";
-const chat=document.getElementById('chat'),q=document.getElementById('q');let hist=[];const sid='trial-'+Math.random().toString(36).slice(2);
+const chat=document.getElementById('chat'),q=document.getElementById('q');let hist=[];const sid='web-'+Math.random().toString(36).slice(2);
 function esc(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 function links(s){let out=[],i=0;while(i<s.length){const a=s.indexOf('[',i);if(a<0){out.push({t:s.slice(i)});break}const b=s.indexOf('](',a);const nl=s.indexOf('\n',a);if(b<0||(nl>=0&&nl<b)){out.push({t:s.slice(i,a+1)});i=a+1;continue}let j=b+2,d=1;while(j<s.length&&d>0){if(s[j]=='(')d++;else if(s[j]==')')d--;else if(/\s/.test(s[j]))break;if(d>0)j++}if(d!==0||!/^https?:\/\//.test(s.slice(b+2))){out.push({t:s.slice(i,a+1)});i=a+1;continue}out.push({t:s.slice(i,a)});out.push({l:s.slice(a+1,b),u:s.slice(b+2,j)});i=j+1}return out}
 function inl(s,R){R=R||{m:{},n:0};return links(s).map(p=>p.u?(()=>{const k=p.u;if(!R.m[k])R.m[k]=++R.n;return '<a class="chip" href="'+esc(p.u)+'" target="_blank" rel="noopener" title="'+esc(p.l)+'">'+R.m[k]+'</a>'})():esc(p.t).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/(https?:\/\/[^\s<]+[^\s<.,;)])/g,'<a class="inl" href="$1" target="_blank" rel="noopener">$1</a>')).join('').replace(/\s*\(\s*((?:<a class="chip"[^>]*>[^<]*<\/a>[;,\s]*)+)\)/g,(m,g)=>g.replace(/[;,\s]+(?=<a)/g,''))}
