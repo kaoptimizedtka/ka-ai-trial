@@ -21,6 +21,7 @@ a.inl:hover{text-decoration:underline}a.inl{color:#1d5fd1;word-break:break-all}
 .take{margin:16px 0;font-weight:600;padding:14px 16px;background:#fff8e6;border:1px solid #f3dfa5;border-radius:12px}
 .vid a{display:block;padding:10px 14px;border-radius:10px;background:var(--g);color:#fff;margin:8px 0;font-size:15px}
 .vid a.ref{background:#fff;color:var(--g);border:1px solid var(--g);margin-left:22px;font-size:14px;padding:7px 12px}
+.fu{display:flex;flex-direction:column;gap:8px;margin:14px 0 4px}.fu button{text-align:left;background:#fafbfd;border:1px solid var(--line);border-left:4px solid var(--gr);border-radius:10px;padding:9px 12px;font:inherit;font-size:15px;color:var(--g);cursor:pointer}.fu button:hover{border-color:var(--gr)}.fu button::before{content:'→  ';color:var(--gr);font-weight:700}
 .tools{color:var(--mute);font-size:12px;display:flex;gap:8px;align-items:center;margin-top:6px}
 .copy{border:1px solid #ddd;background:#fff;border-radius:8px;padding:4px 8px;color:#555;cursor:pointer;font:inherit;font-size:12px;display:inline-flex;align-items:center;gap:4px}.copy:hover{color:var(--ink);border-color:var(--g)}
 .dots::after{content:"…";animation:b 1s infinite}@keyframes b{50%{opacity:.2}}
@@ -59,16 +60,17 @@ function render(a){
 const ICON='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
 async function ask(text){document.getElementById('welcome')?.remove();hist.push({role:'user',content:text});
  const d=document.createElement('section');d.innerHTML='<div class="q"></div><div class="ans"><span class="dots">Searching the lessons</span></div><div class="tools"></div>';d.querySelector('.q').textContent=text;chat.appendChild(d);d.scrollIntoView({behavior:'smooth'});
- const b=d.querySelector('.ans'),m=d.querySelector('.tools');const t0=performance.now();let ans='',first=0;
+ const b=d.querySelector('.ans'),m=d.querySelector('.tools');const t0=performance.now();let ans='',first=0,fu=[];
  try{const r=await fetch(URL_,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:hist,session_id:sid})});
   if(!r.ok){b.textContent="KA-AI Chat is busy right now. Please try again in a moment.";return}
   const rd=r.body.getReader(),dec=new TextDecoder();let buf='';
   while(true){const{done,value}=await rd.read();if(done)break;buf+=dec.decode(value,{stream:true});let i;
    while((i=buf.indexOf('\n'))>=0){const line=buf.slice(0,i).trim();buf=buf.slice(i+1);if(!line.startsWith('data:'))continue;const x=line.slice(5).trim();if(x==='[DONE]')continue;
-    try{const j=JSON.parse(x);const c=j.choices?.[0]?.delta?.content;if(c){if(!first)first=performance.now()-t0;ans+=c;b.innerHTML=render(ans)}}catch(e){}}}
+    try{const j=JSON.parse(x);if(j.meta&&j.meta.followups)fu=j.meta.followups;const c=j.choices?.[0]?.delta?.content;if(c){if(!first)first=performance.now()-t0;ans+=c;b.innerHTML=render(ans)}}catch(e){}}}
   hist.push({role:'assistant',content:ans});
   const c=document.createElement('button');c.className='copy';c.title='Copy answer';c.innerHTML=ICON;
   c.onclick=async()=>{try{await navigator.clipboard.write([new ClipboardItem({'text/plain':new Blob([plain(ans)],{type:'text/plain'}),'text/html':new Blob([b.innerHTML],{type:'text/html'})})])}catch(e){try{await navigator.clipboard.writeText(plain(ans))}catch(e2){}}c.innerHTML='✓ Copied';setTimeout(()=>c.innerHTML=ICON,1500)};
+  if(fu.length){const f=document.createElement('div');f.className='fu';fu.forEach(t=>{const bt=document.createElement('button');bt.textContent=t;bt.onclick=()=>ask(t);f.appendChild(bt)});d.insertBefore(f,m)}
   m.appendChild(c);const s=document.createElement('span');s.textContent='First words '+(first/1000).toFixed(1)+' s · complete '+((performance.now()-t0)/1000).toFixed(1)+' s';m.appendChild(s);
  }catch(e){b.textContent="KA-AI Chat is busy right now. Please try again in a moment."}}
 document.querySelectorAll('.starters button').forEach(x=>x.onclick=()=>ask(x.textContent));
