@@ -7,14 +7,14 @@
 header{background:var(--g);color:#fff;padding:10px 20px;border-bottom:4px solid var(--gr);display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:2}
 .logo{width:36px;height:36px;border-radius:8px;background:#fff;color:var(--g);display:grid;place-items:center;font-weight:800;font-size:14px}
 header b{font-size:19px}header small{margin-left:auto;font-size:12px;background:#fef3c7;color:#92400e;border-radius:999px;padding:3px 10px}
-main{max-width:860px;margin:0 auto;padding:20px 16px 150px}
+main{max-width:1180px;margin:0 auto;padding:12px 24px 130px}
 .welcome{text-align:center;padding:36px 0 10px}.welcome h1{font-size:26px;margin:12px 0 6px;color:var(--g)}.welcome p{color:var(--mute);margin:0 0 18px}
 
 .starters{display:grid;grid-template-columns:1fr 1fr;gap:10px}.starters button{background:#fafbfd;border:1px solid var(--line);border-radius:12px;padding:12px;text-align:left;font:inherit;font-size:15px;cursor:pointer}
 .starters button:hover{border-color:var(--gr)}@media(max-width:600px){.starters{grid-template-columns:1fr}}
-.q{font-size:21px;font-weight:650;margin:26px 0 12px;color:var(--g)}
+.q{font-size:21px;font-weight:650;margin:18px 0 10px;color:var(--g)}
 .ans{white-space:normal}.ov{margin:0 0 14px}.plain{white-space:pre-wrap}
-.kp{counter-reset:k;list-style:none;padding:0;margin:0}.kp li{counter-increment:k;position:relative;padding:12px 14px 12px 52px;border:1px solid var(--line);border-left:4px solid var(--gr);border-radius:12px;margin:10px 0;background:#fafbfd}
+.kp{counter-reset:k;list-style:none;padding:0;margin:0}.kp li{counter-increment:k;position:relative;padding:10px 14px 10px 50px;border:1px solid var(--line);border-left:4px solid var(--gr);border-radius:12px;margin:10px 0;background:#fafbfd}
 .kp li::before{content:counter(k);position:absolute;left:14px;top:12px;width:26px;height:26px;border-radius:50%;background:var(--g);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:700}
 a.chip{display:inline-grid;place-items:center;min-width:20px;height:20px;padding:0 5px;border-radius:999px;background:var(--gr);color:#fff;font-size:11.5px;font-weight:700;line-height:1;vertical-align:super;margin:0 1px}a.chip:hover{background:var(--g);text-decoration:none}
 a.inl:hover{text-decoration:underline}a.inl{color:#1d5fd1;word-break:break-all}
@@ -26,10 +26,12 @@ a.inl:hover{text-decoration:underline}a.inl{color:#1d5fd1;word-break:break-all}
 .copy{border:1px solid #ddd;background:#fff;border-radius:8px;padding:4px 8px;color:#555;cursor:pointer;font:inherit;font-size:12px;display:inline-flex;align-items:center;gap:4px}.copy:hover{color:var(--ink);border-color:var(--g)}
 .dots::after{content:"…";animation:b 1s infinite}@keyframes b{50%{opacity:.2}}
 form{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);padding:12px 16px}
-.row{max-width:860px;margin:0 auto;display:flex;gap:8px}textarea{flex:1;resize:none;border:1px solid #cfd8d3;border-radius:12px;padding:12px;font:inherit}
+.row{max-width:1180px;margin:0 auto;display:flex;gap:8px}textarea{flex:1;resize:none;border:1px solid #cfd8d3;border-radius:12px;padding:12px;font:inherit}
 button.send{background:var(--gr);font-weight:600;color:#fff;border:0;border-radius:12px;padding:0 20px;font:inherit;cursor:pointer}
-.foot{max-width:860px;margin:6px auto 0;font-size:11px;color:var(--mute);text-align:center}
-</style></head><body>
+.foot{max-width:1180px;margin:6px auto 0;font-size:11px;color:var(--mute);text-align:center}
+html.emb header{display:none}
+@media(max-width:700px){body{font-size:16px}main{padding:8px 10px 120px}.q{font-size:18px;margin:14px 0 8px}.kp li{padding:9px 10px 9px 40px}.kp li::before{left:9px;top:10px;width:22px;height:22px;font-size:12px}.vid a.ref{margin-left:10px}.take{padding:10px 12px}form{padding:8px 10px}.foot{font-size:10px;line-height:1.3}.welcome{padding:14px 0 6px}.welcome h1{font-size:22px}header img{height:40px!important}}
+</style></head><body><script>if(window.self!==window.top)document.documentElement.classList.add('emb')</script>
 <header><img src="hdr/image.png" alt="KA-AI Chat" style="height:54px;display:block"></header>
 <main id="chat"><div class="welcome" id="welcome"><img src="ic/image.png" alt="" style="width:64px;height:64px"><h1>Welcome to KA-AI Chat</h1><p>Ask anything about KA philosophy, surgical technique, KA-optimized implant design, outcomes and clinical evidence.</p>
 <div class="starters">
@@ -59,7 +61,7 @@ function render(a){
  return h}
 const ICON='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
 async function ask(text){document.getElementById('welcome')?.remove();hist.push({role:'user',content:text});
- const d=document.createElement('section');d.innerHTML='<div class="q"></div><div class="ans"><span class="dots">Searching the lessons</span></div><div class="tools"></div>';d.querySelector('.q').textContent=text;chat.appendChild(d);window.scrollTo({top:Math.max(0,d.offsetTop-80),behavior:'smooth'});
+ const d=document.createElement('section');d.innerHTML='<div class="q"></div><div class="ans"><span class="dots">Searching the lessons</span></div><div class="tools"></div>';d.querySelector('.q').textContent=text;chat.appendChild(d);window.scrollTo({top:Math.max(0,d.offsetTop-(document.documentElement.classList.contains('emb')?8:80)),behavior:'smooth'});
  const b=d.querySelector('.ans'),m=d.querySelector('.tools');const t0=performance.now();let ans='',first=0,fu=[];
  try{const r=await fetch(URL_,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:hist,session_id:sid})});
   if(!r.ok){b.textContent="KA-AI Chat is busy right now. Please try again in a moment.";return}
@@ -68,7 +70,7 @@ async function ask(text){document.getElementById('welcome')?.remove();hist.push(
    while((i=buf.indexOf('\n'))>=0){const line=buf.slice(0,i).trim();buf=buf.slice(i+1);if(!line.startsWith('data:'))continue;const x=line.slice(5).trim();if(x==='[DONE]')continue;
     try{const j=JSON.parse(x);if(j.meta&&j.meta.followups)fu=j.meta.followups;const c=j.choices?.[0]?.delta?.content;if(c){if(!first)first=performance.now()-t0;ans+=c;b.innerHTML=render(ans)}}catch(e){}}}
   hist.push({role:'assistant',content:ans});
-  const c=document.createElement('button');c.className='copy';c.title='Copy question and answer';c.innerHTML=ICON;
+  const c=document.createElement('button');c.className='copy';c.title='Copy answer';c.innerHTML=ICON;
   c.onclick=async()=>{try{await navigator.clipboard.write([new ClipboardItem({'text/plain':new Blob([text+'\n\n'+plain(ans)],{type:'text/plain'}),'text/html':new Blob(['<p><b>'+esc(text)+'</b></p>'+b.innerHTML],{type:'text/html'})})])}catch(e){try{await navigator.clipboard.writeText(text+'\n\n'+plain(ans))}catch(e2){}}c.innerHTML='✓ Copied';setTimeout(()=>c.innerHTML=ICON,1500)};
   if(fu.length){const f=document.createElement('div');f.className='fu';fu.forEach(t=>{const bt=document.createElement('button');bt.textContent=t;bt.onclick=()=>ask(t);f.appendChild(bt)});d.insertBefore(f,m)}
   m.appendChild(c);const s=document.createElement('span');s.textContent='First words '+(first/1000).toFixed(1)+' s · complete '+((performance.now()-t0)/1000).toFixed(1)+' s';m.appendChild(s);
