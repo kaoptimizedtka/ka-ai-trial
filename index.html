@@ -11,7 +11,7 @@ main{max-width:1500px;margin:0 auto;padding:12px 24px 130px}
 .welcome{text-align:center;padding:10px 0;min-height:calc(100vh - 150px);display:flex;flex-direction:column;justify-content:center}.welcome img{align-self:center}.welcome h1{font-size:34px;margin:14px 0 8px;color:var(--g)}.welcome p{color:var(--mute);margin:0 0 26px;font-size:20px}
 
 .starters{display:grid;grid-template-columns:1fr 1fr;gap:14px}.starters button{background:#fafbfd;border:1px solid var(--line);border-radius:12px;padding:18px 20px;text-align:left;font:inherit;font-size:18px;cursor:pointer}
-.starters button:hover{border-color:var(--gr)}@media(max-width:600px){.starters{grid-template-columns:1fr}}
+.starters button:hover{border-color:var(--gr)}.lang{margin-top:18px;color:var(--g);font-size:17px;font-weight:600}@media(max-width:600px){.starters{grid-template-columns:1fr}}
 .q{font-size:1.25em;font-weight:650;margin:18px 0 10px;color:var(--g)}
 .ans{white-space:normal}.ov{margin:0 0 14px}.plain{white-space:pre-wrap}
 .kp{counter-reset:k;list-style:none;padding:0;margin:0}.kp li{counter-increment:k;position:relative;padding:10px 14px 10px 50px;border:1px solid var(--line);border-left:4px solid var(--gr);border-radius:12px;margin:10px 0;background:#fafbfd}
@@ -30,7 +30,7 @@ form{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid
 button.send{background:var(--gr);font-weight:700;color:#fff;border:0;border-radius:14px;padding:0 30px;font:inherit;font-size:18px;cursor:pointer}
 .foot{max-width:1500px;margin:6px auto 0;font-size:11px;color:var(--mute);text-align:center}
 html.emb header{display:none}
-@media(max-width:700px){body{font-size:16px}main{padding:8px 10px 120px}.q{font-size:18px;margin:14px 0 8px}.kp li{padding:9px 10px 9px 40px}.kp li::before{left:9px;top:10px;width:22px;height:22px;font-size:12px}.vid a.ref{margin-left:10px}.take{padding:10px 12px}form{padding:8px 10px calc(10px + env(safe-area-inset-bottom))}.foot{font-size:10px;line-height:1.3}.welcome{padding:6px 0;min-height:calc(100vh - 130px)}.welcome h1{font-size:24px}.welcome p{display:none}.welcome h1{margin:6px 0 12px}.starters{gap:7px}.starters button{font-size:15px;padding:8px 12px;line-height:1.35}textarea{font-size:16px;padding:11px 12px}button.send{padding:0 18px;font-size:16px}.welcome img{width:40px!important;height:40px!important}header img{height:40px!important}}
+@media(max-width:700px){body{font-size:16px}main{padding:8px 10px 120px}.q{font-size:18px;margin:14px 0 8px}.kp li{padding:9px 10px 9px 40px}.kp li::before{left:9px;top:10px;width:22px;height:22px;font-size:12px}.vid a.ref{margin-left:10px}.take{padding:10px 12px}form{padding:8px 10px calc(10px + env(safe-area-inset-bottom))}.foot{font-size:10px;line-height:1.3}.welcome{padding:6px 0;min-height:calc(100vh - 130px)}.welcome h1{font-size:24px}.welcome p{display:none}.welcome h1{margin:6px 0 12px}.starters{gap:7px}.starters button{font-size:15px;padding:8px 12px;line-height:1.35}textarea{font-size:16px;padding:11px 12px}button.send{padding:0 18px;font-size:16px}.welcome img{width:40px!important;height:40px!important}.lang{margin-top:10px;font-size:14px}header img{height:40px!important}}
 </style></head><body><script>if(window.self!==window.top)document.documentElement.classList.add('emb')</script>
 <header><img src="hdr/image.png" alt="KA-AI Chat" style="height:54px;display:block"></header>
 <main id="chat"><div class="welcome" id="welcome"><img src="ic/image.png" alt="" style="width:64px;height:64px"><h1>Welcome to KA-AI Chat</h1><p>Ask anything about KA philosophy, surgical technique, KA-optimized implant design, outcomes and clinical evidence.</p>
@@ -38,8 +38,9 @@ html.emb header{display:none}
 <button>What are the three kinematic axes of the knee?</button><button>What are the four balancing steps for KA?</button>
 <button>Should I use a robot to do KA?</button><button>I like MA-designed implants. Are they compatible with KA?</button>
 <button>Why retain the PCL in KA?</button><button>How do I do KA in a valgus knee?</button>
-<button>Is implant survival with KA as good as MA?</button><button>How do I verify the femoral resections with a caliper?</button></div></div></main>
-<form id="f"><div class="row"><textarea id="q" rows="1" placeholder="Ask your own question about KA…"></textarea><button class="send">Send</button></div>
+<button>Is implant survival with KA as good as MA?</button><button>How do I verify the femoral resections with a caliper?</button></div>
+<div class="lang">Ask in any language — the answer comes back in the same language.</div></div></main>
+<form id="f"><div class="row"><textarea id="q" rows="1" placeholder="Ask your own question…"></textarea><button class="send">Send</button></div>
 <div class="foot">KA-AI Chat is a clinical education tool, not a substitute for surgical judgment. Apply your own clinical expertise in all patient care decisions.</div></form>
 <script>
 (()=>{const i=document.querySelector(".welcome img");if(i){const l=document.createElement("link");l.rel="icon";l.href=i.src;document.head.appendChild(l)}})();
