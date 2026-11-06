@@ -25,12 +25,12 @@ a.inl:hover{text-decoration:underline}a.inl{color:#1d5fd1;word-break:break-all}
 .tools{color:var(--mute);font-size:12px;display:flex;gap:8px;align-items:center;margin-top:6px}
 .copy{border:1px solid #ddd;background:#fff;border-radius:8px;padding:4px 8px;color:#555;cursor:pointer;font:inherit;font-size:12px;display:inline-flex;align-items:center;gap:4px}.copy:hover{color:var(--ink);border-color:var(--g)}
 .dots::after{content:"…";animation:b 1s infinite}@keyframes b{50%{opacity:.2}}
-form{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);padding:10px 16px calc(12px + env(safe-area-inset-bottom))}
-.row{max-width:1180px;margin:0 auto;display:flex;gap:8px}textarea{flex:1;resize:none;border:1px solid #cfd8d3;border-radius:12px;padding:12px;font:inherit}
-button.send{background:var(--gr);font-weight:600;color:#fff;border:0;border-radius:12px;padding:0 20px;font:inherit;cursor:pointer}
+form{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);box-shadow:0 -6px 18px rgba(20,27,77,.07);padding:10px 16px calc(12px + env(safe-area-inset-bottom))}
+.row{max-width:1180px;margin:0 auto;display:flex;gap:8px}textarea{flex:1;resize:none;border:2px solid var(--gr);border-radius:14px;padding:14px 16px;font:inherit;font-size:18px;background:#f3fbf4;box-shadow:0 0 0 4px rgba(17,197,38,.13);outline:none}textarea:focus{background:#fff;box-shadow:0 0 0 5px rgba(17,197,38,.25)}textarea::placeholder{color:#3f4a5a}
+button.send{background:var(--gr);font-weight:700;color:#fff;border:0;border-radius:14px;padding:0 30px;font:inherit;font-size:18px;cursor:pointer}
 .foot{max-width:1180px;margin:6px auto 0;font-size:11px;color:var(--mute);text-align:center}
 html.emb header{display:none}
-@media(max-width:700px){body{font-size:16px}main{padding:8px 10px 120px}.q{font-size:18px;margin:14px 0 8px}.kp li{padding:9px 10px 9px 40px}.kp li::before{left:9px;top:10px;width:22px;height:22px;font-size:12px}.vid a.ref{margin-left:10px}.take{padding:10px 12px}form{padding:8px 10px calc(10px + env(safe-area-inset-bottom))}.foot{font-size:10px;line-height:1.3}.welcome{padding:6px 0;min-height:calc(100vh - 130px)}.welcome h1{font-size:24px}.welcome p{display:none}.welcome h1{margin:6px 0 12px}.starters{gap:7px}.starters button{font-size:15px;padding:8px 12px;line-height:1.35}.welcome img{width:40px!important;height:40px!important}header img{height:40px!important}}
+@media(max-width:700px){body{font-size:16px}main{padding:8px 10px 120px}.q{font-size:18px;margin:14px 0 8px}.kp li{padding:9px 10px 9px 40px}.kp li::before{left:9px;top:10px;width:22px;height:22px;font-size:12px}.vid a.ref{margin-left:10px}.take{padding:10px 12px}form{padding:8px 10px calc(10px + env(safe-area-inset-bottom))}.foot{font-size:10px;line-height:1.3}.welcome{padding:6px 0;min-height:calc(100vh - 130px)}.welcome h1{font-size:24px}.welcome p{display:none}.welcome h1{margin:6px 0 12px}.starters{gap:7px}.starters button{font-size:15px;padding:8px 12px;line-height:1.35}textarea{font-size:16px;padding:11px 12px}button.send{padding:0 18px;font-size:16px}.welcome img{width:40px!important;height:40px!important}header img{height:40px!important}}
 </style></head><body><script>if(window.self!==window.top)document.documentElement.classList.add('emb')</script>
 <header><img src="hdr/image.png" alt="KA-AI Chat" style="height:54px;display:block"></header>
 <main id="chat"><div class="welcome" id="welcome"><img src="ic/image.png" alt="" style="width:64px;height:64px"><h1>Welcome to KA-AI Chat</h1><p>Ask anything about KA philosophy, surgical technique, KA-optimized implant design, outcomes and clinical evidence.</p>
@@ -39,7 +39,7 @@ html.emb header{display:none}
 <button>Should I use a robot to do KA?</button><button>I like MA-designed implants. Are they compatible with KA?</button>
 <button>Why retain the PCL in KA?</button><button>How do I do KA in a valgus knee?</button>
 <button>Is implant survival with KA as good as MA?</button><button>How do I verify the femoral resections with a caliper?</button></div></div></main>
-<form id="f"><div class="row"><textarea id="q" rows="1" placeholder="Type your question..."></textarea><button class="send">Send</button></div>
+<form id="f"><div class="row"><textarea id="q" rows="1" placeholder="Ask your own question about KA…"></textarea><button class="send">Send</button></div>
 <div class="foot">KA-AI Chat is a clinical education tool, not a substitute for surgical judgment. Apply your own clinical expertise in all patient care decisions.</div></form>
 <script>
 (()=>{const i=document.querySelector(".welcome img");if(i){const l=document.createElement("link");l.rel="icon";l.href=i.src;document.head.appendChild(l)}})();
@@ -79,5 +79,6 @@ async function ask(text){document.getElementById('welcome')?.remove();hist.push(
  }catch(e){b.textContent="KA-AI Chat is busy right now. Please try again in a moment."}}
 document.querySelectorAll('.starters button').forEach(x=>x.onclick=()=>ask(x.textContent));
 document.getElementById('f').onsubmit=e=>{e.preventDefault();const t=q.value.trim();if(t){q.value='';ask(t)}};
+if(innerWidth>700&&!/iPad|iPhone|Android/.test(navigator.userAgent))q.focus();
 q.onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();document.getElementById('f').requestSubmit()}};
 </script></body></html>
