@@ -68,8 +68,8 @@ async function ask(text){document.getElementById('welcome')?.remove();hist.push(
    while((i=buf.indexOf('\n'))>=0){const line=buf.slice(0,i).trim();buf=buf.slice(i+1);if(!line.startsWith('data:'))continue;const x=line.slice(5).trim();if(x==='[DONE]')continue;
     try{const j=JSON.parse(x);if(j.meta&&j.meta.followups)fu=j.meta.followups;const c=j.choices?.[0]?.delta?.content;if(c){if(!first)first=performance.now()-t0;ans+=c;b.innerHTML=render(ans)}}catch(e){}}}
   hist.push({role:'assistant',content:ans});
-  const c=document.createElement('button');c.className='copy';c.title='Copy answer';c.innerHTML=ICON;
-  c.onclick=async()=>{try{await navigator.clipboard.write([new ClipboardItem({'text/plain':new Blob([plain(ans)],{type:'text/plain'}),'text/html':new Blob([b.innerHTML],{type:'text/html'})})])}catch(e){try{await navigator.clipboard.writeText(plain(ans))}catch(e2){}}c.innerHTML='✓ Copied';setTimeout(()=>c.innerHTML=ICON,1500)};
+  const c=document.createElement('button');c.className='copy';c.title='Copy question and answer';c.innerHTML=ICON;
+  c.onclick=async()=>{try{await navigator.clipboard.write([new ClipboardItem({'text/plain':new Blob([text+'\n\n'+plain(ans)],{type:'text/plain'}),'text/html':new Blob(['<p><b>'+esc(text)+'</b></p>'+b.innerHTML],{type:'text/html'})})])}catch(e){try{await navigator.clipboard.writeText(text+'\n\n'+plain(ans))}catch(e2){}}c.innerHTML='✓ Copied';setTimeout(()=>c.innerHTML=ICON,1500)};
   if(fu.length){const f=document.createElement('div');f.className='fu';fu.forEach(t=>{const bt=document.createElement('button');bt.textContent=t;bt.onclick=()=>ask(t);f.appendChild(bt)});d.insertBefore(f,m)}
   m.appendChild(c);const s=document.createElement('span');s.textContent='First words '+(first/1000).toFixed(1)+' s · complete '+((performance.now()-t0)/1000).toFixed(1)+' s';m.appendChild(s);
  }catch(e){b.textContent="KA-AI Chat is busy right now. Please try again in a moment."}}
